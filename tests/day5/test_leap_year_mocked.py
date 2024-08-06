@@ -17,3 +17,6 @@ def test_fetch_data(mocked_requests, leap_year):
     mocked_requests.assert_called_once_with(
         "https://digidates.de/api/v1/leapyear/?year=2023"
     )
+
+
+
