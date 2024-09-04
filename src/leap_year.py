@@ -23,7 +23,6 @@ class LeapYear:
 
 if __name__ == "__main__":
     leap_year = LeapYear("https://digidates.de/api/v1/leapyear")
-    print(leap_year.check_connection())
     print(leap_year.check_leap_year(year="2024"))
 
 
