@@ -45,13 +45,27 @@ class RealCargoAPI:
         pass
 
 
+class FakeCargoAPI:
+    def __init__(self):
+        self._shipments = {}
+
+    def get_latest_eta(self, reference: str) -> Optional[date]:
+        return self._shipments[reference].eta
+
+    def sync(self, shipment: Shipment) -> None:
+        self._shipments[shipment.reference] = shipment
+
+    def __contains__(self, shipment: Shipment) -> bool:
+        return shipment in self._shipments.values()
+
+
 def create_shipment(
     quantities: Dict[str, int],
     incoterm: str,
 ):
     reference = uuid.uuid4().hex[:10]
     order_lines = [OrderLine(sku=sku, qty=qty) for sku, qty in quantities.items()]
-    real_cargo_api = RealCargoAPI()
+    cargo_api = RealCargoAPI()
     shipment = Shipment(
         reference=reference,
         lines=order_lines,
@@ -59,5 +73,5 @@ def create_shipment(
         incoterm=incoterm,
     )
     shipment.save()
-    real_cargo_api.sync(shipment)
+    cargo_api.sync(shipment)
     return shipment
