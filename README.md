@@ -1,6 +1,6 @@
 # Pytest Mocking Email Course
 
-This repo contains the sample code for the Pytest Mocking Email Course.
+This repo contains the sample code for the Pytest Mocking Email Course on Pytest with Eric.
 
 
 # Requirements
